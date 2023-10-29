@@ -1,20 +1,25 @@
 // Add your code here
+
 function submitData(name, email){
-    const formData={
-        name : name,
-        email : email,
-    };
-    const postData = {
+    
+    const baseUrl =`http://localhost:3000`;
+
+    return fetch(`${baseUrl}/users`,
+        {
         method: "POST",
         headers: {
-                "Content-Type": 'application/json',
-                "Accept": 'application/json',
+                "Content-Type": "application/json",
+                Accept: "application/json",
         },
-        body: JSON.stringify(formData),
-    };
-
-    return fetch(`http://localhost:3000/users`,postData)
-        .then(response=>response.json())
+        body: JSON.stringify(
+            {
+                "name" : name,
+                "email" : email,
+             })
+        })
+        .then(function(response) {
+            return response.json();
+        })
         .then(object=>{
             let h2 = document.createElement('h2');
             h2.innerHTML = object.id;
